@@ -38,15 +38,16 @@ router.post("/", upload.single("uploaded_file"), function (req, res) {
   const buf = Buffer.from(data, "base64");
   Tesseract.recognize(buf, "eng", { logger: (m) => console.log(m) }).then(
     ({ data: { text } }) => {
-      console.log(text);
+      console.log(text)
+      res.send(text)
     }
   );
-  fs.writeFile("./image.png", buf, function(err) {
-    if (err) throw err;
-});
+//   fs.writeFile("./image.png", buf, function(err) {
+//     if (err) throw err;
+// });
   // console.log(typeof req.file)
   // console.log(req.file, req.body)
-  res.send("received");
+  
 });
 // EXPORT+
 module.exports = router;
