@@ -25,12 +25,23 @@ a:link {
 
 .manualEdit{
   cursor: pointer;
+  margin-bottom: 0;
+  margin-top: 0;
 }
 
 a:visited {
   text-decoration: none;
 
 }
+
+.wrong{
+  font-size: small;
+  margin-bottom: 0;
+  margin-top: 0;
+
+
+}
+
 
 .result{
   font-family: 'Coda', cursive;

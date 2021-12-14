@@ -113,10 +113,12 @@ function HomePage() {
     setOpen(false);
   };
 
-  const handleEdit = (e:any) => {
+  const handleEdit = (e: any) => {
+    e.preventDefault();
     console.log(e)
     console.log('hi')
-   
+    setResponse(e.target[0].value)
+
 
 
   }
@@ -125,7 +127,7 @@ function HomePage() {
     <div>
       <Camera renderCamera={renderCamera} videoRef={videoRef} takePhoto={takePhoto} showCamera={showCamera} />
       <Preview photoExist={photoExist} photoRef={photoRef} sendPhoto={sendPhoto} photo={photo} />
-      <Result response={response} handleClose={handleClose} handleEdit={handleEdit} open={open} handleClickOpen={handleClickOpen}/>
+      <Result response={response} handleClose={handleClose} handleEdit={handleEdit} open={open} handleClickOpen={handleClickOpen} />
     </div>
   )
 }

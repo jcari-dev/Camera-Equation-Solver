@@ -22,7 +22,7 @@ function Preview(props:any) {
               </div>
             </Box>
             <br />
-            <Button variant="contained" onClick={() => props.sendPhoto(props.photo)}> Send </Button>
+            <Button variant="contained" onClick={() => props.sendPhoto(props.photo)}> Scan This Image</Button>
             <br />
             {/* {props.response ? props.response : <CircularProgress />} */}
 

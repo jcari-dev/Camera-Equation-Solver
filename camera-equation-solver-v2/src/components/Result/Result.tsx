@@ -10,7 +10,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 
 function Result(props: any) {
 
-   
+
 
     return (
         <div>
@@ -18,38 +18,37 @@ function Result(props: any) {
                 {props.response}
             </div>
             <div>
-                {props.response ? <div> <p>Wrong? </p> <p className="manualEdit"> <div>
-                <p onClick={props.handleClickOpen}>
-                    Click here to manually input the equation.
-                </p>
+                {props.response ? <div> <p className='wrong'>Wrong? </p> <p className="manualEdit"> <div>
+                    <p className='wrong' onClick={props.handleClickOpen}>
+                        Click here to manually input the equation.
+                    </p>
 
 
-                <Dialog  open={props.open} onClose={props.handleClose}>
-                <form onSubmit={(e) =>{props.handleEdit(e)}}>
+                    <Dialog open={props.open} onClose={props.handleClose}>
+                        <form onSubmit={(e) => { props.handleEdit(e) }}>
 
-                    <DialogTitle>Edit Result</DialogTitle>
-                    <DialogContent>
-                        <TextField
-                            autoFocus
-                            margin="dense"
-                            id="name"
-                            label="Equation"
-                            type="email"
-                            fullWidth
-                            variant="standard"
-                        />
-                    </DialogContent>
-                    <DialogActions>
-                        <Button onClick={props.handleClose}>Cancel</Button>
-                        <Button type="submit" onClick={props.handleClose}>Confirm</Button>
-                    </DialogActions>
-                </form>
+                            <DialogTitle>Edit Result</DialogTitle>
+                            <DialogContent>
+                                <TextField
+                                    autoFocus
+                                    margin="dense"
+                                    id="name"
+                                    label="Equation"
+                                    fullWidth
+                                    variant="standard"
+                                />
+                            </DialogContent>
+                            <DialogActions>
+                                <Button onClick={props.handleClose}>Cancel</Button>
+                                <Button type="submit" onClick={props.handleClose}>Confirm</Button>
+                            </DialogActions>
+                        </form>
 
-                </Dialog>
-
-            </div> </p> </div> : ""}
+                    </Dialog>
+                    
+                </div> </p> </div> : ""}
             </div>
-            
+
         </div>
 
     )
