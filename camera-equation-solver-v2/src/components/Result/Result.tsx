@@ -22,7 +22,7 @@ function Result(props: any) {
                     <p className='wrong' onClick={props.handleClickOpen}>
                         Click here to manually input the equation.
                     </p>
-
+                    <br />
 
                     <Dialog open={props.open} onClose={props.handleClose}>
                         <form onSubmit={(e) => { props.handleEdit(e) }}>
@@ -45,8 +45,12 @@ function Result(props: any) {
                         </form>
 
                     </Dialog>
-                    
-                </div> </p> </div> : ""}
+
+                </div> </p>
+                    <br />
+                    <Button variant="outlined" >
+                        Solve
+                    </Button> </div> : ""}
             </div>
 
         </div>

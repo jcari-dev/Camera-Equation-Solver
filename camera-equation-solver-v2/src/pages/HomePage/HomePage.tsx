@@ -10,9 +10,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import Camera from '../../components/Camera/Camera';
 import Preview from '../../components/Preview/Preview';
 import Result from '../../components/Result/Result';
-import ManualEdit from '../../components/ManualEdit/ManualEdit';
-import SimpleBackdrop from '../../components/Backdrop/Backdrop';
-
+import Solved from '../../components/Solved/Solved';
 
 function HomePage() {
 
@@ -24,7 +22,7 @@ function HomePage() {
   const [photo, setPhoto] = useState("")
   const [response, setResponse] = useState("")
   const [open, setOpen] = React.useState(false);
-  const editValue = useRef("")
+
 
   const getVideo = () => {
     navigator.mediaDevices
@@ -128,6 +126,8 @@ function HomePage() {
       <Camera renderCamera={renderCamera} videoRef={videoRef} takePhoto={takePhoto} showCamera={showCamera} />
       <Preview photoExist={photoExist} photoRef={photoRef} sendPhoto={sendPhoto} photo={photo} />
       <Result response={response} handleClose={handleClose} handleEdit={handleEdit} open={open} handleClickOpen={handleClickOpen} />
+      <Solved/>
+    
     </div>
   )
 }
