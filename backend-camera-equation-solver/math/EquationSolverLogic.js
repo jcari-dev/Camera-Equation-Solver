@@ -4,7 +4,7 @@ let testSample03 = "3-5";
 let testSample04 = "3*5*93*93*8328";
 let testSample05 = "3/5";
 let testSample06 = "97382974 + 9382388942";
-let testSample07 = "97382974 - 9382388942";
+let testSample07 = "97382974-9382388942";
 let testSample08 = "1+3-522*3+53*5*10+10+39*2*8+19-823+3284+8*3/2";
 let testSample09 = "1000/80/20/30";
 let testSample10 = "(831+381+(391^2-3924))√*3/5*2/4";
@@ -18,16 +18,12 @@ let testSamples = [
   "3(X)=3",
   "5(X2)",
 ];
-
-// console.log(testSamples)
-
+//ANCHOR Addition
 let solvePlusSign = (equation, indexes) => {
-  let clonedEquation = equation.slice(0);
-
   let arrToSum = [];
   let indexToPush = [];
 
-  for (let y = 0; y < equation.length; y++) {
+  for (let y in equation) {
     if (!isNaN(parseInt(equation[y])) || equation[y] === "+") {
       indexToPush.push(equation[y]);
     }
@@ -36,24 +32,19 @@ let solvePlusSign = (equation, indexes) => {
       if (indexToPush.length != 0) {
         arrToSum.push(indexToPush);
       }
-      if (indexToPush.slice(-1)[0] === "+") {
-      } else {
+      if (indexToPush.slice(-1)[0] !== "+") {
         indexToPush = [];
       }
     }
   }
-  // }
 
   arrToSum = arrToSum.filter((index) => index.includes("+"));
 
   let additionOnly = [...new Set(arrToSum)];
 
-  console.log(additionOnly);
-
-
   let additionOnlyToPush = [];
 
-  for (let x = 0; x < additionOnly.length; x++) {
+  for (let x in additionOnly) {
     if (additionOnly[x] != "+") {
       additionOnlyToPush.push(additionOnly[x]);
     } else {
@@ -70,17 +61,13 @@ let solvePlusSign = (equation, indexes) => {
 
   for (let index = 0; index < additionOnly.length; index++) {
     arrayToCompareToEquation.push(additionOnly[index]);
-    additionOnly[index] = additionOnly[index]
-      .split("+")
-      .map(Number);
+    additionOnly[index] = additionOnly[index].split("+").map(Number);
     sum = additionOnly[index].reduce((a, b) => a + b, 0);
     finalArrayNumbers.push(sum);
   }
 
-  console.log(finalArrayNumbers)
-  console.log(equation)
   equation = equation.join("");
-  console.log(equation);
+
   for (
     let indexToReplace = 0;
     indexToReplace < arrayToCompareToEquation.length;
@@ -91,42 +78,32 @@ let solvePlusSign = (equation, indexes) => {
       finalArrayNumbers[indexToReplace]
     );
   }
-  equation = equation.split("")
-  if(indexes[6].length !== 0){
+  equation = equation.split("");
+  if (indexes[6].length !== 0) {
     // DO SUBSTRACTION FUNCTION
-    solveMinusSign(equation, indexes)
+    console.log("got here from addition to subtraction");
+    return solveMinusSign(equation, indexes);
   } else {
-  equation = equation.join("");
-  return equation
-  }
+    equation = equation.join("");
 
-  
+    return equation;
+  }
 };
 
-
-/////////////////// subtraction ////////////////////////////////////
-/////////////////// subtraction ////////////////////////////////////
-/////////////////// subtraction ////////////////////////////////////
-/////////////////// subtraction ////////////////////////////////////
-/////////////////// subtraction ////////////////////////////////////
+//ANCHOR Subtraction
 let solveMinusSign = (equation, indexes) => {
-
-  let clonedEquation = equation.slice(0);
-
   let arrToSub = [];
   let indexToPush = [];
 
-  for (let y = 0; y < equation.length; y++) {
+  for (let y in equation) {
     if (!isNaN(parseInt(equation[y])) || equation[y] === "-") {
       indexToPush.push(equation[y]);
     }
-
     if (isNaN(equation[y])) {
       if (indexToPush.length != 0) {
         arrToSub.push(indexToPush);
       }
-      if (indexToPush.slice(-1)[0] === "-") {
-      } else {
+      if (indexToPush.slice(-1)[0] !== "-") {
         indexToPush = [];
       }
     }
@@ -137,12 +114,9 @@ let solveMinusSign = (equation, indexes) => {
 
   let subOnly = [...new Set(arrToSub)];
 
-  console.log(subOnly);
-
-
   let subOnlyToPush = [];
 
-  for (let x = 0; x < subOnly.length; x++) {
+  for (let x in subOnly) {
     if (subOnly[x] != "-") {
       subOnlyToPush.push(subOnly[x]);
     } else {
@@ -159,17 +133,12 @@ let solveMinusSign = (equation, indexes) => {
 
   for (let index = 0; index < subOnly.length; index++) {
     arrayToCompareToEquation.push(subOnly[index]);
-    subOnly[index] = subOnly[index]
-      .split("-")
-      .map(Number);
-    sub = subOnly[index].reduce((a, b) => a - b, 0);
+    subOnly[index] = subOnly[index].split("-").map(Number);
+    sub = subOnly[index].reduce((a, b) => a - b);
     finalArrayNumbers.push(sub);
   }
 
-  console.log(finalArrayNumbers)
-  console.log(equation)
   equation = equation.join("");
-  console.log(equation);
   for (
     let indexToReplace = 0;
     indexToReplace < arrayToCompareToEquation.length;
@@ -180,27 +149,15 @@ let solveMinusSign = (equation, indexes) => {
       finalArrayNumbers[indexToReplace]
     );
   }
-  equation = equation.split("")
-  console.log('Equation Minus: ', equation)
-
-  // if(indexes[5].length !== 0){
-  //   // DO ADDITION FUNCTION
-  //   solvePlusSign(equation, indexes)
-  // } else {
-  // equation = equation.join("");
-  // return equation
-  // }
-
+  return equation;
 };
+
+//ANCHOR Division
 let solveObelusSign = (equation, indexes) => {
-  let equationLength = equation.length;
-
-  let clonedEquation = equation.slice(0);
-
   let arrToDiv = [];
   let indexToPush = [];
 
-  for (let y = 0; y < equation.length; y++) {
+  for (let y in equation) {
     if (!isNaN(parseInt(equation[y])) || equation[y] === "/") {
       indexToPush.push(equation[y]);
     }
@@ -209,8 +166,7 @@ let solveObelusSign = (equation, indexes) => {
       if (indexToPush.length != 0) {
         arrToDiv.push(indexToPush);
       }
-      if (indexToPush.slice(-1)[0] === "/") {
-      } else {
+      if (indexToPush.slice(-1)[0] !== "/") {
         indexToPush = [];
       }
     }
@@ -221,12 +177,9 @@ let solveObelusSign = (equation, indexes) => {
 
   let divOnly = [...new Set(arrToDiv)];
 
-  console.log(divOnly);
-
-
   let divOnlyToPush = [];
 
-  for (let x = 0; x < divOnly.length; x++) {
+  for (let x in divOnly) {
     if (divOnly[x] != "/") {
       divOnlyToPush.push(divOnly[x]);
     } else {
@@ -243,17 +196,11 @@ let solveObelusSign = (equation, indexes) => {
 
   for (let index = 0; index < divOnly.length; index++) {
     arrayToCompareToEquation.push(divOnly[index]);
-    divOnly[index] = divOnly[index]
-      .split("/")
-      .map(Number);
-    div = divOnly[index].reduce((a, b) => a / b, 0);
+    divOnly[index] = divOnly[index].split("/").map(Number);
+    div = divOnly[index].reduce((a, b) => a / b);
     finalArrayNumbers.push(div);
   }
-
-  console.log(finalArrayNumbers)
-  console.log(equation)
   equation = equation.join("");
-  console.log(equation);
   for (
     let indexToReplace = 0;
     indexToReplace < arrayToCompareToEquation.length;
@@ -264,30 +211,26 @@ let solveObelusSign = (equation, indexes) => {
       finalArrayNumbers[indexToReplace]
     );
   }
-  equation = equation.split("")
-  console.log(equation, 'hi')
-  if (indexes[5].length !== 0){
+  equation = equation.split("");
+
+  if (indexes[5].length !== 0) {
     // DO SUM FUNCTION
-    solvePlusSign(equation, indexes)
-  } else if (indexes[6].length !== 0){
+    console.log("got here going from obelus to plus sign");
+    return solvePlusSign(equation, indexes);
+  } else if (indexes[6].length !== 0) {
     // DO SUBTRACTION FUNCTION
-    solveMinusSign(equation, indexes)
-
+    return solveMinusSign(equation, indexes);
   } else {
-
+    equation = equation.join("");
+    return equation;
   }
-  
-
 };
-let solveMultiplicationSign = (equation, indexes) => {
-  let clonedEquation = equation.slice(0);
 
+//ANCHOR Multiplication
+let solveMultiplicationSign = (equation, indexes) => {
   let arrToMulti = [];
   let indexToPush = [];
-
-  for (let y = 0; y < equation.length; y++) {
-    // equation[y] = parseInt(equation[y]);
-    // console.log(equation[y])
+  for (let y in equation) {
     if (!isNaN(parseInt(equation[y])) || equation[y] === "*") {
       indexToPush.push(equation[y]);
     }
@@ -296,23 +239,19 @@ let solveMultiplicationSign = (equation, indexes) => {
       if (indexToPush.length != 0) {
         arrToMulti.push(indexToPush);
       }
-      if (indexToPush.slice(-1)[0] === "*") {
-      } else {
+      if (indexToPush.slice(-1)[0] !== "*") {
         indexToPush = [];
       }
     }
   }
-  // }
 
   arrToMulti = arrToMulti.filter((index) => index.includes("*"));
 
-  // console.log(arrToMulti)
   let multiplicationOnly = [...new Set(arrToMulti)];
 
-  // let multiplicationOnlyFinal = []
   let multiplicationOnlyToPush = [];
 
-  for (let x = 0; x < multiplicationOnly.length; x++) {
+  for (let x in multiplicationOnly) {
     if (multiplicationOnly[x] != "*") {
       multiplicationOnlyToPush.push(multiplicationOnly[x]);
     } else {
@@ -324,9 +263,7 @@ let solveMultiplicationSign = (equation, indexes) => {
   multiplicationOnly = multiplicationOnly.join(" ");
   multiplicationOnly = multiplicationOnly.split(" ");
   multiplicationOnly = multiplicationOnly.map((item) => item.replace(/,/g, ""));
-  // multiplicationOnly = multiplicationOnly.join(" ")
   let finalArrayNumbers = [];
-  // let finalArrayNumbersHold = [];
   let product = 0;
   let arrayToCompareToEquation = [];
 
@@ -335,14 +272,11 @@ let solveMultiplicationSign = (equation, indexes) => {
     multiplicationOnly[index] = multiplicationOnly[index]
       .split("*")
       .map(Number);
-    // multiplicationOnly[index].map(item => item = parseInt(item))
-    // console.log(multiplicationOnly[index])
     product = multiplicationOnly[index].reduce((a, b) => a * b, 1);
     finalArrayNumbers.push(product);
   }
 
   equation = equation.join("");
-  console.log(equation);
   for (
     let indexToReplace = 0;
     indexToReplace < arrayToCompareToEquation.length;
@@ -353,37 +287,30 @@ let solveMultiplicationSign = (equation, indexes) => {
       finalArrayNumbers[indexToReplace]
     );
   }
-  console.log(equation);
-  console.log(finalArrayNumbers);
-  console.log(arrayToCompareToEquation);
-  console.log(multiplicationOnly);
-  console.log(multiplicationOnlyToPush);
 
-  equation = equation.split("")
+  equation = equation.split("");
 
-  if(indexes[4].length !== 0){
+  if (indexes[4].length !== 0) {
     // DO DIVISION FUNCTION
-    console.log('Equation: ', equation)
-    solveObelusSign(equation, indexes)
-  }
-  else if (indexes[5].length !== 0){
+    console.log("got here after multiplication, going to obelus");
+    return solveObelusSign(equation, indexes);
+  } else if (indexes[5].length !== 0) {
     // DO SUM FUNCTION
-    solvePlusSign(equation, indexes)
-  } else if (indexes[6].length !== 0){
+    return solvePlusSign(equation, indexes);
+  } else if (indexes[6].length !== 0) {
     // DO SUBTRACTION FUNCTION
-    solveMinusSign(equation, indexes)
-
+    return solveMinusSign(equation, indexes);
   } else {
-
+    equation = equation.join("");
+    return equation;
   }
-
-  return equation;
 };
 
-
+//ANCHOR Master Sorter Equation
 let solveSamples = (equationToSolve) => {
   equationToSolve = equationToSolve.split("");
-  //   let lengthOfEquation = equationToSolve.length;
+  equationToSolve = equationToSolve.filter(item => item !== " ")
+
 
   let hasParenthesisStart = false; // ()
   let hasParenthesisEnd = false;
@@ -393,14 +320,6 @@ let solveSamples = (equationToSolve) => {
   let hasEqualSign = false; // =
   let hasPlusSign = false; // +
   let hasMinusSign = false; // -
-
-  //   let parenthesisIndex = equationToSolve.indexOf('(');
-  //   let parenthesisEndIndex = equationToSolve.indexOf(')');
-  //   let equalIndex = equationToSolve.indexOf('=');
-  //   let plusIndex = equationToSolve.indexOf('+');
-  //   let minusIndex = equationToSolve.indexOf('-');
-  //   let multiplicationIndex = equationToSolve.indexOf('*');
-  //   let obelusIndex = equationToSolve.indexOf('/');
 
   let startingParenthesisIndexes = [];
   let endingParenthesisIndexes = [];
@@ -508,14 +427,16 @@ let solveSamples = (equationToSolve) => {
     minusSignIndexes,
   ];
 
-
   if (hasMultiplicationSign) {
-    console.log(masterSignIndexes);
-    solveMultiplicationSign(equationToSolve, masterSignIndexes);
-  } else if(hasObelusSign){
-    solveObelusSign(equationToSolve, masterSignIndexes);
-
+    console.log("got here");
+    return solveMultiplicationSign(equationToSolve, masterSignIndexes);
+  } else if (hasObelusSign) {
+    return solveObelusSign(equationToSolve, masterSignIndexes);
+  } else if (hasPlusSign) {
+    return solvePlusSign(equationToSolve, masterSignIndexes);
+  } else if (hasMinusSign) {
+    return solveMinusSign(equationToSolve, masterSignIndexes);
   }
 };
 
-solveSamples(testSample08);
+console.log(solveSamples(testSample06));
