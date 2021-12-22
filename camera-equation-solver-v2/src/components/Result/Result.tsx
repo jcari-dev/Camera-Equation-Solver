@@ -36,6 +36,7 @@ function Result(props: any) {
                                     label="Equation"
                                     fullWidth
                                     variant="standard"
+                                    defaultValue={props.response}
                                 />
                             </DialogContent>
                             <DialogActions>
@@ -48,7 +49,7 @@ function Result(props: any) {
 
                 </div> </p>
                     <br />
-                    <Button variant="outlined" >
+                    <Button onClick={props.solve} variant="outlined" >
                         Solve
                     </Button> </div> : ""}
             </div>

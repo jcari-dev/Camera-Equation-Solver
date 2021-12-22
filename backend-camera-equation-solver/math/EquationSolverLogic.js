@@ -81,7 +81,7 @@ let solvePlusSign = (equation, indexes) => {
   equation = equation.split("");
   if (indexes[6].length !== 0) {
     // DO SUBSTRACTION FUNCTION
-    console.log("got here from addition to subtraction");
+    // console.log("got here from addition to subtraction");
     return solveMinusSign(equation, indexes);
   } else {
     equation = equation.join("");
@@ -212,10 +212,12 @@ let solveObelusSign = (equation, indexes) => {
     );
   }
   equation = equation.split("");
-
-  if (indexes[5].length !== 0) {
+  indexes[4] = indexes[4] = [] 
+  if (indexes[3].length !== 0){
+    return solveMultiplicationSign(equation, indexes)
+  } else if (indexes[5].length !== 0) {
     // DO SUM FUNCTION
-    console.log("got here going from obelus to plus sign");
+    // console.log("got here going from obelus to plus sign");
     return solvePlusSign(equation, indexes);
   } else if (indexes[6].length !== 0) {
     // DO SUBTRACTION FUNCTION
@@ -228,6 +230,7 @@ let solveObelusSign = (equation, indexes) => {
 
 //ANCHOR Multiplication
 let solveMultiplicationSign = (equation, indexes) => {
+  console.log(equation)
   let arrToMulti = [];
   let indexToPush = [];
   for (let y in equation) {
@@ -289,10 +292,9 @@ let solveMultiplicationSign = (equation, indexes) => {
   }
 
   equation = equation.split("");
-
+  indexes[3] = indexes[3] = [];
   if (indexes[4].length !== 0) {
     // DO DIVISION FUNCTION
-    console.log("got here after multiplication, going to obelus");
     return solveObelusSign(equation, indexes);
   } else if (indexes[5].length !== 0) {
     // DO SUM FUNCTION
@@ -307,7 +309,7 @@ let solveMultiplicationSign = (equation, indexes) => {
 };
 
 //ANCHOR Master Sorter Equation
-let solveSamples = (equationToSolve) => {
+let solveEquation = (equationToSolve) => {
   equationToSolve = equationToSolve.split("");
   equationToSolve = equationToSolve.filter(item => item !== " ")
 
@@ -418,17 +420,22 @@ let solveSamples = (equationToSolve) => {
   }
 
   let masterSignIndexes = [
-    concatParenthesisIndexes,
-    powerSignIndexes,
-    sqrtSignIndexes,
-    multiplicationSignIndexes,
-    obelusSignIndexes,
-    plusSignIndexes,
-    minusSignIndexes,
+    concatParenthesisIndexes, // 0
+    powerSignIndexes, // 1
+    sqrtSignIndexes, // 2
+    multiplicationSignIndexes, // 3
+    obelusSignIndexes, // 4
+    plusSignIndexes, // 5
+    minusSignIndexes, // 6
   ];
 
-  if (hasMultiplicationSign) {
-    console.log("got here");
+  console.log(masterSignIndexes)
+
+  if(masterSignIndexes[3][0] < masterSignIndexes[4][0] && hasMultiplicationSign === true && hasObelusSign === true) {
+    return solveMultiplicationSign(equationToSolve, masterSignIndexes)
+  } else if (masterSignIndexes[3][0] > masterSignIndexes[4][0] && hasMultiplicationSign === true && hasObelusSign === true){
+    return solveObelusSign(equationToSolve, masterSignIndexes)
+  } else if (hasMultiplicationSign) {
     return solveMultiplicationSign(equationToSolve, masterSignIndexes);
   } else if (hasObelusSign) {
     return solveObelusSign(equationToSolve, masterSignIndexes);
@@ -439,4 +446,6 @@ let solveSamples = (equationToSolve) => {
   }
 };
 
-console.log(solveSamples(testSample06));
+// console.log(solveEquation("100/10*5"));
+
+module.exports = {solveEquation};

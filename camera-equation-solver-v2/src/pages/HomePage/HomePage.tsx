@@ -22,6 +22,7 @@ function HomePage() {
   const [photo, setPhoto] = useState("")
   const [response, setResponse] = useState("")
   const [open, setOpen] = React.useState(false);
+  const [solved, setSolved] = React.useState("")
 
 
   const getVideo = () => {
@@ -50,7 +51,7 @@ function HomePage() {
     let data = new FormData();
     data.append("uploaded_file", photo);
 
-    Axios.post("http://localhost:3001/Api", data, {
+    Axios.post("http://localhost:3001/Api/ResolveCharacters", data, {
       headers: {
         accept: "application/json",
         "Accept-Language": "en-US,en;q=0.8",
@@ -64,6 +65,21 @@ function HomePage() {
         console.log(error);
       });
   };
+
+  const sendEquation = (equation: any) => {
+    console.log('got here', equation)
+    equation = encodeURIComponent(equation)
+    Axios.post("http://localhost:3001/Api/ResolveEquation", {
+      'equationData': equation
+    })
+    .then((equationResponse) =>{
+      setSolved(equationResponse.data)
+    })
+    .catch((error) =>{
+      console.log(error)
+    })
+
+  }
 
   const takePhoto = () => {
 
@@ -113,20 +129,18 @@ function HomePage() {
 
   const handleEdit = (e: any) => {
     e.preventDefault();
-    console.log(e)
-    console.log('hi')
     setResponse(e.target[0].value)
 
 
 
   }
-
+  console.log(response)
   return (
     <div>
       <Camera renderCamera={renderCamera} videoRef={videoRef} takePhoto={takePhoto} showCamera={showCamera} />
       <Preview photoExist={photoExist} photoRef={photoRef} sendPhoto={sendPhoto} photo={photo} />
-      <Result response={response} handleClose={handleClose} handleEdit={handleEdit} open={open} handleClickOpen={handleClickOpen} />
-      <Solved/>
+      <Result solve={() => sendEquation(response)} response={response} handleClose={handleClose} handleEdit={handleEdit} open={open} handleClickOpen={handleClickOpen} />
+      <Solved solved={solved} />
     
     </div>
   )

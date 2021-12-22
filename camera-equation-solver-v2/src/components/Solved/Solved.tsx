@@ -1,9 +1,9 @@
 import React from 'react'
 
-function Solved() {
+function Solved(props:any) {
     return (
         <div>
-            
+           Response: {props.solved} 
         </div>
     )
 }
