@@ -129,12 +129,13 @@ function HomePage() {
 
   const handleEdit = (e: any) => {
     e.preventDefault();
-    setResponse(e.target[0].value)
+
+    return setResponse(e.target[0].value)
 
 
 
   }
-  console.log(response)
+
   return (
     <div>
       <Camera renderCamera={renderCamera} videoRef={videoRef} takePhoto={takePhoto} showCamera={showCamera} />

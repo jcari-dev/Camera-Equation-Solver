@@ -24,7 +24,7 @@ let solvePlusSign = (equation, indexes) => {
   let indexToPush = [];
 
   for (let y in equation) {
-    if (!isNaN(parseInt(equation[y])) || equation[y] === "+") {
+    if (!isNaN(parseInt(equation[y])) || equation[y] === "+" || equation[y] === ".") {
       indexToPush.push(equation[y]);
     }
 
@@ -32,7 +32,7 @@ let solvePlusSign = (equation, indexes) => {
       if (indexToPush.length != 0) {
         arrToSum.push(indexToPush);
       }
-      if (indexToPush.slice(-1)[0] !== "+") {
+      if (indexToPush.slice(-1)[0] !== "+" && equation[y] !== ".") {
         indexToPush = [];
       }
     }
@@ -66,8 +66,10 @@ let solvePlusSign = (equation, indexes) => {
     finalArrayNumbers.push(sum);
   }
 
+  console.log(equation)
   equation = equation.join("");
 
+  console.log(equation)
   for (
     let indexToReplace = 0;
     indexToReplace < arrayToCompareToEquation.length;
@@ -78,6 +80,7 @@ let solvePlusSign = (equation, indexes) => {
       finalArrayNumbers[indexToReplace]
     );
   }
+  console.log(equation)
   equation = equation.split("");
   if (indexes[6].length !== 0) {
     // DO SUBSTRACTION FUNCTION
@@ -96,14 +99,14 @@ let solveMinusSign = (equation, indexes) => {
   let indexToPush = [];
 
   for (let y in equation) {
-    if (!isNaN(parseInt(equation[y])) || equation[y] === "-") {
+    if (!isNaN(parseInt(equation[y])) || equation[y] === "-" || equation[y] === ".") {
       indexToPush.push(equation[y]);
     }
     if (isNaN(equation[y])) {
       if (indexToPush.length != 0) {
         arrToSub.push(indexToPush);
       }
-      if (indexToPush.slice(-1)[0] !== "-") {
+      if (indexToPush.slice(-1)[0] !== "-" && equation[y] !== ".") {
         indexToPush = [];
       }
     }
@@ -149,6 +152,7 @@ let solveMinusSign = (equation, indexes) => {
       finalArrayNumbers[indexToReplace]
     );
   }
+  // console.log(equation)
   return equation;
 };
 
@@ -158,7 +162,7 @@ let solveObelusSign = (equation, indexes) => {
   let indexToPush = [];
 
   for (let y in equation) {
-    if (!isNaN(parseInt(equation[y])) || equation[y] === "/") {
+    if (!isNaN(parseInt(equation[y])) || equation[y] === "/" || equation[y] === ".") {
       indexToPush.push(equation[y]);
     }
 
@@ -166,7 +170,7 @@ let solveObelusSign = (equation, indexes) => {
       if (indexToPush.length != 0) {
         arrToDiv.push(indexToPush);
       }
-      if (indexToPush.slice(-1)[0] !== "/") {
+      if (indexToPush.slice(-1)[0] !== "/" && equation[y] !== ".") {
         indexToPush = [];
       }
     }
@@ -201,6 +205,7 @@ let solveObelusSign = (equation, indexes) => {
     finalArrayNumbers.push(div);
   }
   equation = equation.join("");
+  // console.log(equation)
   for (
     let indexToReplace = 0;
     indexToReplace < arrayToCompareToEquation.length;
@@ -230,11 +235,11 @@ let solveObelusSign = (equation, indexes) => {
 
 //ANCHOR Multiplication
 let solveMultiplicationSign = (equation, indexes) => {
-  console.log(equation)
+  // console.log(equation)
   let arrToMulti = [];
   let indexToPush = [];
   for (let y in equation) {
-    if (!isNaN(parseInt(equation[y])) || equation[y] === "*") {
+    if (!isNaN(parseInt(equation[y])) || equation[y] === "*" || equation[y] === ".") {
       indexToPush.push(equation[y]);
     }
 
@@ -242,7 +247,7 @@ let solveMultiplicationSign = (equation, indexes) => {
       if (indexToPush.length != 0) {
         arrToMulti.push(indexToPush);
       }
-      if (indexToPush.slice(-1)[0] !== "*") {
+      if (indexToPush.slice(-1)[0] !== "*" && equation[y] !== ".") {
         indexToPush = [];
       }
     }
@@ -264,6 +269,7 @@ let solveMultiplicationSign = (equation, indexes) => {
   }
 
   multiplicationOnly = multiplicationOnly.join(" ");
+  console.log(multiplicationOnly)
   multiplicationOnly = multiplicationOnly.split(" ");
   multiplicationOnly = multiplicationOnly.map((item) => item.replace(/,/g, ""));
   let finalArrayNumbers = [];
@@ -280,6 +286,7 @@ let solveMultiplicationSign = (equation, indexes) => {
   }
 
   equation = equation.join("");
+  console.log(equation)
   for (
     let indexToReplace = 0;
     indexToReplace < arrayToCompareToEquation.length;
@@ -429,7 +436,7 @@ let solveEquation = (equationToSolve) => {
     minusSignIndexes, // 6
   ];
 
-  console.log(masterSignIndexes)
+  // console.log(masterSignIndexes)
 
   if(masterSignIndexes[3][0] < masterSignIndexes[4][0] && hasMultiplicationSign === true && hasObelusSign === true) {
     return solveMultiplicationSign(equationToSolve, masterSignIndexes)

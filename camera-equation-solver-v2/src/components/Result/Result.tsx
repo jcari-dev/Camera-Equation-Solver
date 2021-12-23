@@ -7,8 +7,16 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 
+type ResultProps = {
+    solve: (response: string) => void
+    response: string
+    handleClose: () => void
+    handleEdit: (e: object) => void
+    open: boolean
+    handleClickOpen: () => void
+}
 
-function Result(props: any) {
+function Result(props: ResultProps) {
 
 
 
@@ -49,7 +57,7 @@ function Result(props: any) {
 
                 </div> </p>
                     <br />
-                    <Button onClick={props.solve} variant="outlined" >
+                    <Button onClick={() => props.solve} variant="outlined" >
                         Solve
                     </Button> </div> : ""}
             </div>
