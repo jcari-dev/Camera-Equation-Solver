@@ -16,7 +16,7 @@ type ResultProps = {
     handleClickOpen: () => void
 }
 
-function Result(props: ResultProps) {
+function Result(props: any) {
 
 
 
@@ -57,7 +57,7 @@ function Result(props: ResultProps) {
 
                 </div> </p>
                     <br />
-                    <Button onClick={() => props.solve} variant="outlined" >
+                    <Button onClick={props.solve} variant="outlined" >
                         Solve
                     </Button> </div> : ""}
             </div>
