@@ -11,6 +11,7 @@ import Camera from '../../components/Camera/Camera';
 import Preview from '../../components/Preview/Preview';
 import Result from '../../components/Result/Result';
 import Solved from '../../components/Solved/Solved';
+import AppBar from '../../components/AppBar/AppBar'
 
 function HomePage() {
 
@@ -138,6 +139,7 @@ function HomePage() {
 
   return (
     <div>
+      <AppBar/>
       <Camera renderCamera={renderCamera} videoRef={videoRef} takePhoto={takePhoto} showCamera={showCamera} />
       <Preview photoExist={photoExist} photoRef={photoRef} sendPhoto={sendPhoto} photo={photo} />
       <Result solve={() => sendEquation(response)} response={response} handleClose={handleClose} handleEdit={handleEdit} open={open} handleClickOpen={handleClickOpen} />

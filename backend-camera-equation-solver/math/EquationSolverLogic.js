@@ -253,6 +253,8 @@ let solveMultiplicationSign = (equation, indexes) => {
     }
   }
 
+  console.log(arrToMulti)
+
   arrToMulti = arrToMulti.filter((index) => index.includes("*"));
 
   let multiplicationOnly = [...new Set(arrToMulti)];
